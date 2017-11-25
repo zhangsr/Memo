@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
 
+import com.avos.avoscloud.AVAnalytics;
+
 import java.util.List;
 
 public class EditActivity extends AppCompatActivity {
@@ -28,6 +30,18 @@ public class EditActivity extends AppCompatActivity {
                 mEditText.setSelection(mOriginContent.length());
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AVAnalytics.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        AVAnalytics.onPause(this);
     }
 
     private Memo findMemoById(long id) {

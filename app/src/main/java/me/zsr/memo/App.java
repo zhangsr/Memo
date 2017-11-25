@@ -2,6 +2,9 @@ package me.zsr.memo;
 
 import android.app.Application;
 
+import com.avos.avoscloud.AVAnalytics;
+import com.avos.avoscloud.AVOSCloud;
+
 /**
  * @description:
  * @author: Match
@@ -21,6 +24,9 @@ public class App extends Application {
         super.onCreate();
 
         DBManager.init(this);
+        AVOSCloud.initialize(this,"AnPt6gKYtOG6hwhyrNvh1v79-gzGzoHsz","3LYlfVKkXHQJ08h4J5K0yKCd");
+        AVOSCloud.setDebugLogEnabled(BuildConfig.DEBUG);
+        AVAnalytics.enableCrashReport(this, true);
     }
 }
 

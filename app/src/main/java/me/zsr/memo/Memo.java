@@ -21,19 +21,22 @@ public class Memo {
 
     private Long modifyTime;
 
+    private String category;
+
     private String ext1;
 
     private String ext2;
 
     private String ext3;
 
-    @Generated(hash = 1791059313)
+    @Generated(hash = 225877194)
     public Memo(Long id, String content, Long createTime, Long modifyTime,
-            String ext1, String ext2, String ext3) {
+            String category, String ext1, String ext2, String ext3) {
         this.id = id;
         this.content = content;
         this.createTime = createTime;
         this.modifyTime = modifyTime;
+        this.category = category;
         this.ext1 = ext1;
         this.ext2 = ext2;
         this.ext3 = ext3;
@@ -97,6 +100,14 @@ public class Memo {
 
     public void setExt3(String ext3) {
         this.ext3 = ext3;
+    }
+
+    public String getCategory() {
+        return this.category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
 }
