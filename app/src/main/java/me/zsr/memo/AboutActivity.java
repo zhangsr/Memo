@@ -20,7 +20,7 @@ import butterknife.OnClick;
 public class AboutActivity extends AppCompatActivity {
     private static final String ID_WECHAT = "matchzsr";
     private static final String ID_ALIPAY = "275690559@qq.com";
-    private static final String URL_STORE = "http://fir.im/memo_match";
+    private static final String URL_STORE = "http://fir.im/memox";
     @Bind(R.id.back_btn)
     ImageButton mBackButton;
     @Bind(R.id.title_txt)

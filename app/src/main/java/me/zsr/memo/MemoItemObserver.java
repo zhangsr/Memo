@@ -8,4 +8,5 @@ package me.zsr.memo;
 
 public interface MemoItemObserver {
     void onItemClick(int index);
+    void onItemLongClick(int index);
 }

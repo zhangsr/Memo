@@ -49,6 +49,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 memoItemObserver.onItemClick(position);
             }
         });
+        textView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                memoItemObserver.onItemLongClick(position);
+                return true;
+            }
+        });
     }
 
     // TODO: 22/11/2017 OPTMIZE

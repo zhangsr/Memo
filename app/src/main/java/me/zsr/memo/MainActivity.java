@@ -2,6 +2,7 @@ package me.zsr.memo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -14,6 +15,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.avos.avoscloud.AVAnalytics;
 
 import java.util.List;
@@ -65,6 +68,23 @@ public class MainActivity extends AppCompatActivity
                 Intent intent = new Intent(MainActivity.this, EditActivity.class);
                 intent.putExtras(bundle);
                 startActivityForResult(intent, App.REQUEST_CODE_EDIT);
+            }
+
+            @Override
+            public void onItemLongClick(final int index) {
+                new MaterialDialog.Builder(MainActivity.this)
+                        .title("删除 ？")
+                        .positiveText("确定")
+                        .negativeText("取消")
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                DBManager.getMemoDao().delete(mMemoList.get(index));
+                                mMemoList.remove(index);
+                                mAdapter.notifyDataSetChanged();
+                            }
+                        })
+                        .show();
             }
         });
         mRecyclerView.setAdapter(mAdapter);
