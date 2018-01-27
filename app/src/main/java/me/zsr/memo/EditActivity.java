@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -66,6 +68,33 @@ public class EditActivity extends Activity {
         });
 
         mEditText = findViewById(R.id.edit_text);
+        mEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (mMemo == null) {
+                    if (StringUtil.isEmpty(getCurrentContent())) {
+                        mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_keyboard_backspace_white_24dp));
+                    } else {
+                        mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_done_white_24dp));
+                    }
+                } else {
+                    if (StringUtil.equals(mOriginContent, getCurrentContent())) {
+                        mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_keyboard_backspace_white_24dp));
+                    } else {
+                        mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_done_white_24dp));
+                    }
+                }
+            }
+        });
     }
 
     @Override
