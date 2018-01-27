@@ -18,6 +18,7 @@ public class App extends Application {
     public static final int RESULT_CODE_MODIFIED = 1;
 
     public static final String BUNDLE_KEY_MEMO_ID = "memo_id";
+    public static final String PACKAGE_NAME = "me.zsr.memo";
 
     @Override
     public void onCreate() {

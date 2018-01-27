@@ -1,14 +1,19 @@
 package me.zsr.memo;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 
 import com.avos.avoscloud.AVAnalytics;
 
 import java.util.List;
 
-public class EditActivity extends AppCompatActivity {
+public class EditActivity extends Activity {
+    private Toolbar mToolbar;
     private EditText mEditText;
     private Memo mMemo;
     private String mOriginContent;
@@ -17,8 +22,7 @@ public class EditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
-
-        mEditText = (EditText) findViewById(R.id.edit_text);
+        initViews();
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -30,6 +34,38 @@ public class EditActivity extends AppCompatActivity {
                 mEditText.setSelection(mOriginContent.length());
             }
         }
+
+    }
+
+    private void initViews() {
+        mToolbar = findViewById(R.id.toolbar);
+        mToolbar.inflateMenu(R.menu.menu_edit);
+        mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_keyboard_backspace_white_24dp));
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_share:
+                        Intent sendIntent = new Intent();
+                        sendIntent.setAction(Intent.ACTION_SEND);
+                        sendIntent.putExtra(Intent.EXTRA_TEXT, getCurrentContent());
+                        sendIntent.putExtra(Intent.EXTRA_TITLE, "Memo");
+                        sendIntent.putExtra("source", App.PACKAGE_NAME);
+                        sendIntent.setType("text/plain");
+                        startActivity(sendIntent);
+                        break;
+                }
+                return false;
+            }
+        });
+
+        mEditText = findViewById(R.id.edit_text);
     }
 
     @Override
