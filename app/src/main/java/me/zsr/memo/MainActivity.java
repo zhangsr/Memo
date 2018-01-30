@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                                 DBManager.getMemoDao().delete(mMemoList.get(index));
                                 mMemoList.remove(index);
-                                mAdapter.notifyDataSetChanged();
+                                mAdapter.notifyItemRangeRemoved(index, 1);
                             }
                         })
                         .show();
