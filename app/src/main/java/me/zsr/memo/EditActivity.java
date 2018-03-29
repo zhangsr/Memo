@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.ScrollingMovementMethod;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -68,6 +69,7 @@ public class EditActivity extends Activity {
         });
 
         mEditText = findViewById(R.id.edit_text);
+        mEditText.setMovementMethod(ScrollingMovementMethod.getInstance());
         mEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
