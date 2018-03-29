@@ -8,8 +8,8 @@ android {
         applicationId "me.zsr.memo"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 4
-        versionName "0.3"
+        versionCode 5
+        versionName "0.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
