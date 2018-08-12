@@ -69,7 +69,10 @@ public class EditActivity extends Activity {
         });
 
         mEditText = findViewById(R.id.edit_text);
-        mEditText.setMovementMethod(ScrollingMovementMethod.getInstance());
+
+        // setMovementMethod导致不能全选
+//        mEditText.setMovementMethod(ScrollingMovementMethod.getInstance());
+
         mEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
