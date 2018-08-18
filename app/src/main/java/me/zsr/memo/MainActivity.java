@@ -63,6 +63,10 @@ public class MainActivity extends AppCompatActivity
         mAdapter = new ItemAdapter(mMemoList, new MemoItemObserver() {
             @Override
             public void onItemClick(int index) {
+                if (mMemoList == null || mMemoList.size() <= index) {
+                    return;
+                }
+
                 Bundle bundle = new Bundle();
                 bundle.putLong(App.BUNDLE_KEY_MEMO_ID, mMemoList.get(index).getId());
                 Intent intent = new Intent(MainActivity.this, EditActivity.class);
@@ -79,9 +83,14 @@ public class MainActivity extends AppCompatActivity
                         .onPositive(new MaterialDialog.SingleButtonCallback() {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                if (mMemoList == null || mMemoList.size() <= index) {
+                                    return;
+                                }
+
                                 DBManager.getMemoDao().delete(mMemoList.get(index));
+                                // optimize : reload memo list ?
                                 mMemoList.remove(index);
-                                mAdapter.notifyItemRangeRemoved(index, 1);
+                                mAdapter.notifyDataSetChanged();
                             }
                         })
                         .show();
